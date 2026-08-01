@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: aicu-ticketing-staging
+    runtime: node
+    region: frankfurt
+    plan: free
+    autoDeployTrigger: checksPass
+    buildCommand: corepack enable && pnpm install --frozen-lockfile
+    startCommand: pnpm start
+    healthCheckPath: /healthz
+    envVars:
+      - key: NODE_VERSION
+        value: "24"
+      - key: AI_PROVIDER
+        value: replay

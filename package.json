@@ -1,0 +1,33 @@
+{
+  "name": "aicu-l27-ticketing-staging-teacher",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=24 <27"
+  },
+  "packageManager": "pnpm@11.5.1",
+  "scripts": {
+    "dev": "node scripts/start-dev.js",
+    "dev:replay": "node scripts/start-dev.js --provider=replay",
+    "dev:mistral": "node scripts/start-dev.js --provider=mistral",
+    "dev:opencode": "node scripts/start-dev.js --provider=opencode",
+    "start": "node server/index.js",
+    "check:runtime": "node scripts/check-node-version.js",
+    "check": "node --check server/index.js && node --check server/app.js && node --check server/ticket-rules.js && node --check server/validation.js && node --check server/ai/provider-error.js && node --check server/ai/mistral-adapter.js && node --check server/ai/incident-brief-validator.js && node --check server/ai/incident-brief-service.js && node --check server/ai/incident-replay-adapter.js && node --check server/ai/opencode-adapter.js && node --check scripts/start-dev.js && node --check scripts/verify-remote.js && node --check src/main.js && node --check src/incident-api.js && node --check src/incident-view.js && node --check src/incident.js",
+    "test": "node --test \"tests/unit/*.test.js\" \"tests/api/*.test.js\"",
+    "test:unit": "node --test \"tests/unit/*.test.js\"",
+    "test:api": "node --test \"tests/api/*.test.js\"",
+    "start:test": "node scripts/start-test-server.js",
+    "test:e2e": "playwright test",
+    "test:all": "pnpm test && pnpm test:e2e",
+    "test:feature": "node --test \"tests/unit/incident-brief.test.js\" \"tests/api/incident-routes.test.js\"",
+    "test:environment": "node --test \"tests/api/health.test.js\"",
+    "verify": "pnpm check && pnpm test && pnpm test:e2e --grep \"incident\"",
+    "verify:remote": "node scripts/verify-remote.js",
+    "setup:browsers": "playwright install chromium"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.61.1"
+  }
+}
