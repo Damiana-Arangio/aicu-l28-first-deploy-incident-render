@@ -7,7 +7,7 @@ services:
     autoDeployTrigger: checksPass
     buildCommand: corepack enable && pnpm install --frozen-lockfile
     startCommand: pnpm start
-    healthCheckPath: /healthz
+    healthCheckPath: /health
     envVars:
       - key: NODE_VERSION
         value: "24"
